@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户注册</title>
+</head>
+<body>
+<form id="form-reg">
+	<h1>用户注册</h1>
+	<p>请输入用户名：</p>
+	<p><input name="username" /> <span style="color:red;" id="span-username"></span></p>
+	<p>请输入密码：</p>
+	<p><input name="password" /></p>
+	<p>请输入年龄：</p>
+	<p><input name="age" /></p>
+	<p>请输入手机号码：</p>
+	<p><input name="phone" /></p>
+	<p>请输入电子邮箱：</p>
+	<p><input name="email" /></p>
+	<p><input id="btn-reg" type="button" value="注册" /></p>
+</form>
+<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$("#btn-reg").click(function(){
+	$("#span-username").html("");
+	// url：将请求提交到哪里去
+	// data：请求参数
+	// type：请求方式，例如GET或POST等
+	// dataType：服务器端响应的数据类型，取值可以是json、text、xml等，取决于服务器端响应时的响应头中的Content-Type
+	// success：响应成功时(Http响应码是200)的回调(callback)函数，函数中的参数就是服务器端响应的JSON数据形成的JSON对象
+	$.ajax({
+		"url":"user/handle_register.do",
+		"data":$("#form-reg").serialize(),
+		"type":"post",
+		"dataType":"json",
+		"success":function(obj) {
+			if (obj.state == 0) {
+				// alert(obj.message);
+				$("#span-username").html(obj.message);
+			} else {
+				alert("注册成功！");
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

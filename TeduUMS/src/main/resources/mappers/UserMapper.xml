@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<!-- namespace：对应的接口 -->
+<mapper namespace="cn.tedu.ssm.mapper.UserMapper">
+
+	<!-- id：抽象方法的名称 -->
+	<insert id="addnew">
+		INSERT INTO t_user (
+			username,password,
+			age,phone,
+			email
+		) VALUES (
+			#{username},#{password},
+			#{age},#{phone},
+			#{email}
+		)
+	</insert>
+	
+	<select id="findByUsername"
+		resultType="cn.tedu.ssm.entity.User">
+		SELECT
+			id, username,
+			password, age,
+			phone, email
+		FROM
+			t_user
+		WHERE
+			username=#{username}	
+	</select>
+
+</mapper>
+
+
+
+
+
+

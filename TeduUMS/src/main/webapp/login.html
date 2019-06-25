@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户登录</title>
+</head>
+<body>
+<form id="form-login">
+	<h1>用户登录</h1>
+	<p>请输入用户名：</p>
+	<p><input name="username" /> <span style="color:red;" id="span-username"></span></p>
+	<p>请输入密码：</p>
+	<p><input name="password" /> <span style="color:red;" id="span-password"></span></p>
+	<p><input id="btn-login" type="button" value="登录" /></p>
+</form>
+<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+$("#btn-login").click(function(){
+	$("#span-username").html("");
+	$("#span-password").html("");
+	$.ajax({
+		"url":"user/handle_login.do",
+		"data":$("#form-login").serialize(),
+		"type":"post",
+		"dataType":"json",
+		"success":function(obj) {
+			if (obj.state == 1) {
+				alert("登录成功！");
+			} else if (obj.state == 2) {
+				$("#span-username").html(obj.message);
+			} else {
+				$("#span-password").html(obj.message);
+			}
+		}
+	});
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
